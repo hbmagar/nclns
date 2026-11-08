@@ -1,0 +1,122 @@
+{% extends 'index.html' %}
+{% load static%}
+{% block body %}
+<!--main Body part  -->
+<div class="page-header page-banner-about-us object-fit-cover">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="position-absolute top-50 translate-middle-y">
+          <div class="section-heading">
+            <h1 class="entry-title">About Us</h1>
+          </div>
+
+          <!-- breadcrum-paging jumping status -->
+          <nav
+            style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+            aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+              <li class="breadcrumb-item" aria-current="page">About Us</li>
+            </ol>
+          </nav>
+        </div>
+      </div><!-- .col -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+</div><!-- .page-header -->
+
+<!-- feature with photo1 -->
+<section class="w3l-feature-with-photo-1 py-lg-3 py-2">
+  <div class="feature-with-photo-hny">
+    <div class="container">
+      <div class="feature-with-photo-content">
+        <div class="ab-in-flow row py-lg-5 py-md-2">
+          {% for abouts in about_us_contents %}
+          <div class="col-lg-6 ab-right pl-lg-5">
+            <h6 class="title-subhny mb-2"><span>{{ abouts.about_title }}</span></h6>
+            <h3 class="title-w3l mb-4">{{ abouts.about_header }}</h3>
+            <p class="my-4">{{ abouts.about_us }}</p>
+
+            <div class="w3l-two-buttons">
+              <a href="{% url 'service'%}" class="btn btn-style btn-primary mt-lg-1 mt-3">{{abouts.first_btn}} <span
+                  class="bi bi-chevron-double-right ms-2"></span></a>
+              <a href="{% url 'contact'%}" class="btn btn-outline-primary btn-style mt-lg-1 mt-3 ms-2">{{abouts.second_btn}} <span
+                  class="bi bi-chevron-double-right ms-2"></span></a>
+            </div>
+            
+          </div>
+          <div class="col-lg-6 ab-left pe-lg-5 mb-lg-5 mt-4">
+    
+            {% if abouts.image %}
+            <img src="{{ abouts.image.url }}" class="img-fluid radius-image shadow-lg bg-body-tertiary rounded" alt="">
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- //feature with photo1 -->
+
+
+
+
+<!-- about us -->
+<div class="demo">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="about-us">
+          {% for about_aims in about_aims_contents %}
+          <div class="about">
+            <div class="about-content">
+              <span class="about-title">{{ about_aims.about_aim_title }}</span>
+              <div class="content-inner">
+                <span class="icon"><i class="{{ about_aims.about_aim_icon }}"></i></span>
+                <p class="description">
+                  {{ about_aims.about_aim }}
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- partner sections-->
+<section class="w3l-clients py-3">
+  <div class="container py-md-5 py-4">
+    <div class="title-main text-center mx-auto mb-5" style="max-width:600px;">
+      {% for about_partners_header in about_partners_header_contents %}
+      <h4 class="title-style">{{ about_partners_header.partner_title }}</h4>
+
+      <p class="title-subhny mt-2">{{ about_partners_header.partner_header }}</p>
+      <button class="cta-button">
+        <i class="{{ about_partners_header.trust_icon }}"></i>
+        {{ about_partners_header.trust_type }}
+      </button>
+      {% endfor %}
+    </div>
+    
+    <div class="partnerpart">
+      <div class="partner">
+        {% for logo in partners_logo_contents %}
+        <!-- PNG Logos from URL -->
+        <a href="">
+          {% if logo.partner_logo %}
+          <img src="{{ logo.partner_logo.url }}" class="partner-logo" alt="Partner Logo">
+          {% endif %}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- //partner sections -->
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends '../index.html'%} 
+{% load static %}
+{% block body %}
+  <!--main Body part  -->
+  <div class="page-header page-banner-contact object-fit-cover">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="position-absolute top-50 translate-middle-y">
+            <div class="section-heading">
+              <h1 class="entry-title">Contact</h1>
+            </div>
+            <!-- breadcrum-paging jumping status -->
+            <nav
+              style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+              aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+                <li class="breadcrumb-item" aria-current="page">Contact</li>
+
+              </ol>
+            </nav>
+          </div>
+        </div><!-- .col -->
+      </div><!-- .row -->
+    </div><!-- .container -->
+  </div><!-- .page-header -->
+
+  <div class="contact-page-wrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-6">
+          <div class="entry-content">
+            {% for contact_info in contact_info %}
+            <h2>{{ contact_info.con_title }}</h2>
+            
+
+            <p>{{ contact_info.con_descrip }}</p>
+
+            <ul class="contact-social d-flex flex-wrap align-items-center">
+              <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+              <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+              <li><a href="#"><i class="bi bi-linkedin"></i></a></li>
+              <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+              <li><a href="#"><i class="bi bi-whatsapp"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+
+            <ul class="contact-info p-0">
+              <li class="shadow p-2 mb-2 bg-body-tertiary rounded"><i class="bi bi-phone-vibrate"></i>{{ contact_info.con_phone }}
+              </li>
+              <li class="shadow p-2 mb-2 bg-body-tertiary rounded"><i
+                  class="bi bi-envelope-at-fill"></i>{{ contact_info.con_email }}</li>
+              <li class="shadow p-2 mb-2 bg-body-tertiary rounded"><i class="bi bi-geo-alt-fill"></i>{{ contact_info.con_address }}
+              </li>
+            </ul>
+            {% endfor %}
+          </div>
+        </div><!-- .col -->
+
+        <div class="col-12 col-lg-6">
+          <form class="contact-form mb-5 shadow-lg rounded">
+            <input type="text" placeholder="Name">
+            <input type="tel" placeholder="Phone">
+            <input type="email" placeholder="Email">
+            <textarea rows="5" cols="6" placeholder="Messages"></textarea>
+
+            <span>
+              <input class="btn gradient-bg" type="submit" value="Send Inquiry">
+            </span>
+          </form><!-- .contact-form -->
+        </div><!-- .col -->
+      </div><!-- .row -->
+    </div><!-- .container -->
+  </div>
+  <nav class="bg-body-tertiary">
+    <div class="contact-gmap">
+      
+      {% for contact_maping in contact_map %}
+      <iframe
+        src="{{ contact_maping.map_iframe }}"
+        style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      {% endfor %}
+    </div>
+  </nav>
+ {% endblock %}

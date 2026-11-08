@@ -1,0 +1,229 @@
+{% extends '../index.html'%}
+{% load static %}
+{% block body %}
+
+<!--main Body part  -->
+<div class="page-header page-banner-product object-fit-cover">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="position-absolute top-50 translate-middle-y">
+                    <div class="section-heading">
+                        <h1 class="entry-title">Product</h1>
+                    </div>
+                    <!-- breadcrum-paging jumping status -->
+                    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+                        aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="./about.html">About Us</a></li>
+                            <li class="breadcrumb-item" aria-current="page">Product</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div><!-- .col -->
+        </div><!-- .row -->
+    </div><!-- .container -->
+</div><!-- .page-header -->
+
+<div class="main-middle-content w3l-services2 object-fit-cover py-lg-5">
+    <div class="container">
+        <div class="row">
+            {% for products_about in products_about %}
+            <div class="col-lg-6">
+                <h6 class="title-subhny mb-2"><span>What We Product ?</span></h6>
+                <h3 class="title-w3l mb-4">{{ products_about.product_about_header }}
+                    <span class="span-bold">{{ products_about.product_focus_header }}</span>
+                </h3>
+                <p class="mt-1">{{ products_about.explain }}</p>
+
+                <div class="w3l-button mt-lg-5 mb-2">
+                    <a href="{% url 'contact' %}" class="btn btn-style btn-primary">{{ products_about.btn_text }}<span
+                            class="bi bi-chevron-double-right ms-2"></span></a>
+                </div>
+            </div>
+            <div class="col-lg-6 cwp23-text mt-lg-0 ps-lg-5">
+                <div class="cwp23-text-cols">
+                    <div class="column">
+                        <a href="#">
+                            {% if products_about.img1 %}
+                            <img src="{{ products_about.img1.url }}" alt="" class="img-fluid rounded-start"></a>
+                        {% endif %}
+                    </div>
+                    <div class="column">
+                        <a href="#">
+                            {% if products_about.img2 %}
+                            <img src="{{ products_about.img2.url }}" alt="" class="img-fluid rounded-end"></a>
+                        {% endif %}
+                    </div>
+                    <div class="column">
+                        <a href="#">
+                            {% if products_about.img3 %}
+                            <img src="{{ products_about.img3.url }}" alt="" class="img-fluid rounded-start"></a>
+                        {% endif %}
+                    </div>
+                    <div class="column">
+                        <a href="#">
+                            {% if products_about.img4 %}
+                            <img src="{{ products_about.img4.url }}" alt="" class="img-fluid rounded-end"></a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+<!-- tours slider section -->
+<section class="w3l-index5 pb-5 mt-1">
+    <div class="container-fluid py-md-4 py-2">
+        <div class="inner-sec-w3layouts pb-4">
+            <div class="section-heading mb-4 px-5">
+                <h2 class="entry-title">Product List</h2>
+            </div><!-- .section-heading -->
+            <div class="owl-three owl-carousel owl-theme mt-2">
+                {% for prodduct_item in prodduct_items %}
+                <div class="item">
+                    <div class="content-left-sec">
+                        <a class="blog-link d-block zoom-image" href="tours.html">
+                            <img src="{{ prodduct_item.image.url }}" class="img-fluid scale-image" alt=""></a>
+                        <div class="blog-info">
+
+                            <a href="tours.html" class="to-title text-modify">{{ prodduct_item.product_header }}</a>
+
+                            <div class="post-metas d-flex flex-wrap align-items-center">
+                                <span class="posted-date"><a href="#">{{ prodduct_item.published_date }}</a></span>
+                                <span class="event-location"><a href="#">{{ prodduct_item.place }}</a></span>
+                            </div>
+                            <div class="pt-3 d-flex justify-content-between">
+                                <div class="to-price my-auto">
+                                    <label>Rs. {{ prodduct_item.price }}</label>
+                                </div>
+                                <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">Add cart
+                                    <i class="bi bi-cart4"></i></a>
+                            </div>
+                            <ul class="rating-list my-1">
+                                <li><i class="bi bi-star-fill" aria-hidden="true"></i></li>
+                                <li><i class="bi bi-star-fill" aria-hidden="true"></i></li>
+                                <li><i class="bi bi-star-fill" aria-hidden="true"></i></li>
+                                <li><i class="bi bi-star-half" aria-hidden="true"></i></li>
+                                <li><i class="bi bi-star"></i></li>
+                                <li class="ms-1">{{ prodduct_item.star_rate }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- //tours slider section -->
+
+<!-- blog section -->
+<div class="w3l-blog-content py-1">
+    <div class="container py-lg-5 py-md-4 py-2">
+        <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:600px;">
+            <h3 class="title-style">Upcoming New Product</h3>
+        </div>
+        <div class="row justify-content-center">
+            {% for upcoming_product in upcoming_products %}
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-grid-1">
+                    <div class="card-header p-0 position-relative">
+                        <a href="#blog" class="zoom d-block">
+                            {% if upcoming_product.image %}
+                            <img class="card-img-bottom d-block img-fluid img-responsive"
+                                src="{{ upcoming_product.image.url }}" alt="Card image cap">
+                            {% endif %}
+                        </a>
+                        <div class="course-price-badge">{{ upcoming_product.product_status }}</div>
+                    </div>
+                    <div class="card-body course-details">
+                        <div class="course-meta mb-3">
+                            <div class="meta-item course-students">
+                                <a href="#author"><span class="bi bi-people"></span>
+                                    <span class="meta-value">{{ upcoming_product.username }}</span></a>
+                            </div>
+                            <div class="meta-item course-lesson">
+                                <span class="bi bi-heart-fill"></span>
+                                <span class="meta-value">{{ upcoming_product.react_rate }}</span>
+                            </div>
+                            <div class="meta-item course-students">
+                                <span class="bi bi-calendar-check-fill"></span>
+                                <span class="meta-value">{{ upcoming_product.published_date }}</span>
+                            </div>
+                        </div>
+                        <a href="{% url 'service' %}" class="course-desc">{{ upcoming_product.product_header }}</a>
+                        <p class="mt-2">{{ upcoming_product.product_about }}</p>
+                        <a href="{% url 'service' %}" class="btn gradient-bg mt-4">Read more</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- //blog section -->
+
+<!-- Big Deal Section  -->
+<section class="w3l-promocode py-5">
+    <div class="container ppy-lg-5 py-md-4 py-2">
+        {% if deals_product_item %}
+        <div class="row aap-4-section align-items-center">
+            <div class="col-lg-6 col-8 d-none d-sm-block app4-right-image pe-md-5 text-center">
+                {% if deals_product_item.image %}
+                <img src="{{ deals_product_item.image.url }}" class="img-fluid radius-image rounded" alt="App Device" />
+                {% endif %}
+            </div>
+            <div class="col-lg-6 app4-left-text ps-lg-0 mb-lg-0 mb-5">
+                <h6>{{ deals_product_item.deal_title }}</h6>
+                <h4>{{ deals_product_item.deal_header }}</h4>
+                <p class="mb-4">{{ deals_product_item.deal_description }}</p>
+                <div class="app-4-connection">
+                    <div class="newsletter">
+                        <label>{{ deals_product_item.deal_slogan }}</label>
+                        <form action="{% url 'contact' %}" method="GET" class="d-flex wrap-align">
+                            <input type="email" placeholder="Enter your email id" required="required" />
+                            <button type="submit" class="button-style">Send Inquiry</button>
+                        </form>
+                    </div>
+
+                    <p class="mobile-text-app mt-4 pt-2">(Or) To Get Our Contact Us</p>
+                    <div class="app-4-icon">
+                        <ul>
+                            <li>
+                                <a href="{{ deals_product_item.whatsapp_link }}" title="WhatsApp"
+                                    class="app-icon apple-vv">
+                                    <span class="bi bi-whatsapp" aria-hidden="true"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ deals_product_item.facebook_link }}" title="Facebook"
+                                    class="app-icon play-vv">
+                                    <span class="bi bi-facebook" aria-hidden="true"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ deals_product_item.google_link }}" title="Google"
+                                    class="app-icon windows-vv">
+                                    <span class="bi bi-google" aria-hidden="true"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+<!-- //big deal section -->
+
+
+
+{% endblock %}

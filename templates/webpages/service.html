@@ -1,0 +1,143 @@
+{% extends '../index.html'%}
+{% load static %}
+{% block body %}
+
+<!--main Body part  -->
+<div class="page-header page-banner-service object-fit-cover">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="position-absolute top-50 translate-middle-y">
+          <div class="section-heading">
+            <h1 class="entry-title">Service</h1>
+          </div>
+
+          <!-- breadcrum-paging jumping status -->
+          <nav
+            style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+            aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+              <li class="breadcrumb-item" aria-current="page">About Us</li>
+            </ol>
+          </nav>
+        </div>
+      </div><!-- .col -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+</div><!-- .page-header -->
+
+<!--/progress-->
+<section class="w3l-servicesblock w3l-servicesblock1 py-4" id="progress">
+  <div class="container py-2">
+    <div class="row">
+      <div class="col-lg-6 py-lg-4 pe-lg-5 align-self">
+        {% for service_header in service_header_content %}
+        <h5 class="title-google mb-2">Our Working Area</h5>
+        <h3 class="title-w3l">{{ service_header.service_about_header }}</h3>
+        <p class="mt-md-4 mt-3">{{ service_header.service_about_discription }}</p>
+        {% endfor %}
+      </div>
+      <div class="col-lg-6 align-self py-lg-4 mt-3 ps-lg-2">
+        {% for service_progress in service_area %}
+        <div class="progress-info info1">
+          <h6 class="progress-tittle" data-width="{{ service_progress.progress_percentag }}">
+            {{service_progress.progress_heading }}
+            <span class="">{{ service_progress.progress_percentage }}%</span>
+          </h6>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped" role="progressbar"
+              data-width="{{ service_progress.progress_percentage }}"
+              aria-valuenow="{{ service_progress.progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<!--//progress-->
+
+
+
+<!-- our feature section -->
+<section class="w3l-grids-3 py-3">
+  <div class="container py-md-5 py-3">
+    <div class="row bottom-ab-grids align-items-center">
+      <div class="header-sec text-center">
+        {% for feature_title_data in feature_title_data %}
+        <h6 class="title-subhny mb-2"><span>{{feature_title_data.feature_title}}</span></h6>
+        <h3 class="title-w3l mb-3">{{feature_title_data.feature_discription}}<br>
+          {{feature_title_data.feature_short}}
+          <span class="span-bold">{{feature_title_data.feature_bold_text}}</span>
+        </h3>
+        {% endfor %}
+
+      </div>
+
+    </div>
+    <div class="row bottom_grids pt-md-3 text-left">
+      {% for service_feature_data in service_feature_data %}
+      <div class="col-lg-4 col-md-6 mt-3">
+        <div class="grid-block shadow-lg">
+          <h4 class="number">0{{ service_feature_data.id }}</h4>
+          <a href="#blog" class="d-block">
+            <div class="area-box">
+              <span class="{{ service_feature_data.feature_icon }}" aria-hidden="true"></span>
+              <div class="area-box-info">
+                <h4><a href="#feature" class="title-head">
+                    {{ service_feature_data.feature_heading }}
+                  </a>
+                </h4>
+                <p>{{ service_feature_data.feature_description }}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!--/w3l-subscribe-content-->
+<section class="w3l-join-main py-lg-3 py-sm-3 py-2">
+  <div class="container py-md-5">
+    <div class="w3l-project-in">
+      <div class="row midille-section align-items-center">
+        <div class="col-lg-6">
+          <div class="bottom-info responsive1">
+            {% for service_contact in service_contact_data %}
+            <div class="header-section pe-lg-5">
+              <h5 class="join-head mb-2">{{ service_contact.service_contact_title }}</h5>
+              <h3 class="title-w3l two mb-2">{{ service_contact.service_contact_heading }}</h3>
+              <p>{{ service_contact.service_contact_description }}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-lg-6 w3l-subscribe-content ">
+          <div class="responsive1 float-end px-lg-5">
+            <a href="{% url 'contact' %}" class="btn btn-style gradient-bg">Contact Us<span
+                class="bi bi-chevron-double-right ms-2"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--//w3l-subscribe-content-->
+
+
+<script>
+  // Set progress bar widths from data-width attributes
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.progress-bar[data-width]').forEach(function(bar) {
+        var width = bar.dataset.width;
+        if (width) bar.style.width = width + '%';
+    });
+});
+</script>
+
+{% endblock %}

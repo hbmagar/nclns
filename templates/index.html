@@ -1,0 +1,249 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{%static 'image/logo.png'%}" type="image/x-icon">
+  <title>Nirmal Cleanness</title>
+  <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="{%static 'css/style.css'%}">
+  <link rel="stylesheet" href="{%static 'css/bootstrap-icons.css'%}">
+</head>
+
+<body>
+
+  <nav class="top-menu">
+    <div class="container-fluid">
+      <div class="row d-flex">
+
+        <div class="d-none d-lg-block col-lg-6 dis_con">
+          <div class="contact-top1">
+            <i class="bi-geo-alt-fill pe-1" style="font-size: 14px;"></i>
+            {% if tab_items %}
+            {% for item in tab_items %}
+            <span>{{ item.address }}</span>
+            <a href="mailto:{{ item.email }}"><i class="bi bi-envelope-at-fill px-2"></i>{{ item.email }}
+            </a>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-5">
+          <div class="contact-top1 contact-top1-sub">
+            {% if tab_items %}
+            {% for item in tab_items %}
+            <a href="tel:{{ item.phone }}"><i class="bi bi-phone-vibrate pe-2"></i>{{ item.phone }}
+            </a>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-6 col-lg-1">
+          <div class="contact-top2 pe-5">
+            <img style="height: 18px;" src="{%static 'image/flag.gif'%}"alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- This Horizontal Navabar Menu -->
+  <nav id="main-navbar" class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex flex-wrap" href="{%url 'home_page' %}">
+        {% if tab_items %}
+        {% for item in tab_items %}
+        {% if item.logo %}
+        <img id="navbar-logo" src="{{ tab_items.0.logo.url }}" data-default-logo="{{ tab_items.0.logo.url }}"
+          data-scrolled-logo="{{ tab_items.0.scrolled_logo.url }}" class="img-fluid pe-1" alt="Logo"
+          style="height: 30px;">
+        {% endif %}
+        <span class="d-inline-block align-text-top">{{ item.company_name }}</span>
+        {% endfor %}
+        {% endif %}
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav ms-auto me-4">
+          <li class="nav-item dropdown">
+            <a class="nav-link active" aria-current="page" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              About<i class="bi bi-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{%url 'about_us'%}"><i class="bi bi-check"></i>About Us</a></li>
+              <li><a class="dropdown-item" href="{%url 'about_team'%}"><i class="bi bi-check"></i>About Team</a></li>
+            </ul>
+
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'service'%}">Service</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'product'%}">Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'gallery'%}">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'contact'%}">Contact</a>
+          </li>
+        </ul>
+
+        <form class="input-group-sm  ms-auto me-2" role="search">
+          <input class="form-control search-icon" type="search" placeholder=" Search" aria-label="Search">
+        </form>
+        <div class="header-social d-flex">
+          <a class="px-2" href="{% url 'contact' %}"><i class="bi bi-facebook"></i></a>
+          <a class="px-2" href="{% url 'contact' %}"><i class="bi bi-whatsapp"></i></a>
+          <a class="px-2" href="{% url 'contact' %}"><i class="bi bi-youtube"></i></a>
+        </div>
+
+
+      </div>
+    </div>
+  </nav>
+
+
+  {% block body %} {% endblock %}
+
+  <!-- Footer Section -->
+  <footer class="footer-dep">
+    <div class="extended_footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="footer-main">
+              {% if footer_header %}
+              {% for footer_data in footer_header %}
+              <h5>{{ footer_data.full_company_name }}</h5>
+              <p class="p1">"{{ footer_data.company_slogan }}"</p>
+              <p class="p2">{{ footer_data.company_about }}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="footer-items">
+              <h5 class="ef_title"><a href="#ef_products" class="dropdown-toggle" role="button" data-toggle="collapse"
+                  data-bs-toggle="collapse" aria-expanded="false" aria-controls="ef_products">Recent Products</a>
+              </h5>
+              <div class="collapse" id="ef_products">
+                <ul class="list-unstyled">
+                  <li><a href="{% url 'product' %}"><img src="{% static 'image/glass cleaner.svg' %}" alt="">Glass Cleaner</a></li>
+                  <li><a href="{% url 'product' %}"><img src="{% static 'image/Detegent.svg' %}" alt="">Detegent Liquid</a></li>
+                  <li><a href="{% url 'product' %}"><img src="{% static 'image/hand wash.svg' %}" alt="">Hand Wash</a></li>
+                  <li><a href="{% url 'product' %}"><img src="{% static 'image/tile cleaner.svg' %}" alt="">Tile Cleaner</a></li>
+                  <li><a href="{% url 'product' %}"><img src="{% static 'image/Finual.svg' %}" alt="">White Phenyl</a></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-3">
+            <div class="footer-items">
+              <h5 class="ef_title"><a href="#onlinet_training" class="dropdown-toggle" role="button"
+                  data-toggle="collapse" data-bs-toggle="collapse" aria-expanded="false"
+                  aria-controls="onlinet_training">Our Services</a>
+              </h5>
+              <div class="collapse" id="onlinet_training">
+                <ul class="list-unstyled">
+                  <li><a href="{% url 'service' %}"><img src="{% static 'image/sales.svg' %}" alt="">Cleaning Tools supplies</a></li>
+                  <li><a href="{% url 'service' %}"><img src="{% static 'image/recyle.svg' %}" alt="">Recycle Waste Scrap</a></li>
+                  <li><a href="{% url 'service' %}"><img src="{% static 'image/reduce.svg' %}" alt="">Reduce Waste Scrap</a></li>
+                  <li><a href="{% url 'service' %}"><img src="{% static 'image/senv.svg' %}" alt="">Save The Environment</a></li>
+                  <li><a href="{% url 'service' %}"><img src="{% static 'image/quality.svg' %}" alt="">Concelling to Quality</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="footer-items">
+              <h5 class="ef_title"><a href="#contact_us" class="dropdown-toggle" role="button" data-toggle="collapse"
+                  data-bs-toggle="collapse" aria-expanded="false" aria-controls="contact_us">Contact Us</a>
+              </h5>
+              <div class="collapse" id="contact_us">
+                <ul class="list-unstyled">
+                  {% if tab_items %}
+                  {% for menu in tab_items %}
+                  <li><a href="{% url 'contact' %}"><i class="bi bi-phone-vibrate"></i>{{ menu.phone}}</a></li>
+                  <li><a href="{% url 'contact' %}"><i class="bi bi-envelope-at-fill"></i>{{ menu.email }}</a></li>
+                  <li><a href="{% url 'contact' %}"><i class="bi bi-geo-alt-fill"></i>{{menu.address}} </a></li>
+                  {% endfor %}
+                  {% endif %}
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-default" placeholder="Send your Email">
+                    <span class="input-group-text gradient-bg" id="inputGroup-sizing-default"><i
+                        class="bi bi-send"></i></span>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="np-footer ">
+              <button type="button" class=""><a href=""><i class="bi bi-globe-americas-fill"></i>Nepal</a></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="footer-law">
+              <ul class="list-inline">
+                <li class="list-inline-item"><a href="{% url 'contact' %}">Trust Center</a></li>
+                <li class="list-inline-item"><a href="{% url 'contact' %}">Trademarks</a></li>
+                <li class="list-inline-item"><a href="{% url 'contact' %}">Privacy policy</a></li>
+                <li class="list-inline-item"><a href="{% url 'contact' %}">Contact Us</a></li>
+              </ul>
+              {% if footer_header %}
+              {% for copy_copyright in footer_header%}
+              <span class="last-footer">&copy{{copy_copyright.copyright_date|date:"Y"}} {{ copy_copyright.copyright_name }}</span>
+              {% endfor %}
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row mt-1 py-lg-0">
+          <div class="col-lg-12 col-md-12 col-sm-12 py-lg-0 mb-lg-0 mb-0">
+            <div class="footer-social">
+              <ul class="list-inline mb-0">
+                <li class="list-inline-item"><a href=""><img src="../static/image/facebook.svg" alt=""></a></li>
+                <li class="list-inline-item"><a href=""><img src="../static/image/whatsapp.svg" alt=""></a></li>
+                <li class="list-inline-item"><a href=""><img src="../static/image/viber-tile.svg" alt=""></a></li>
+                <li class="list-inline-item"><a href=""><img src="../static/image/x-2.svg" alt=""></a></li>
+                <li class="list-inline-item"><a href=""><img src="../static/image/youtube.svg" alt=""></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{%static 'js/jquery-3.7.1.js'%}"></script>
+  <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{%static 'js/popper.min.js'%}"></script>
+  <script src="{%static 'js/owl.carousel.js'%}"></script>
+  <script src="{%static 'js/jquery.marquee.min.js'%}"></script>
+  <script src="{%static 'js/jquery.flexisel.js'%}"></script>
+  <script src="{%static 'js/custome.js'%}"></script>
+
+
+</body>
+
+</html>

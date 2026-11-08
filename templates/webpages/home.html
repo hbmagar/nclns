@@ -1,0 +1,276 @@
+{% extends 'index.html'%}
+{% load static %}
+{% block body %}
+<!-- slider content -->
+
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    {% for slide_display in slide_show %}
+    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="{{ forloop.counter0 }}" 
+    {% if forloop.first %} 
+      class="active" aria-current="true" 
+      {% endif %} 
+      aria-label="Slide {{ forloop.counter }}">
+    </button>
+    {% endfor %}
+  </div>
+  <div class="carousel-inner">
+    {% for slide_display in slide_show %}
+    <div class="carousel-item overlay-item cci {% if forloop.first %}active{% endif %}" data-bs-interval="4000">
+      {% if slide_display.image %}
+      <img src="{{ slide_display.image.url }}" class="d-block w-100 slide_img" alt="{{ slide_display.title }}">
+      {% endif %}
+      <div class="carousel-caption d-none d-md-block position-absolute top-50 translate-middle-y">
+        <h5 class="fs-3">{{ slide_display.title }}</h5>
+        <p class="fs-5">{{ slide_display.description }}</p>
+        <button type="submit" class="btn btn-md gradient-bg">
+          <a href="{% url 'contact'%}" class="text-white text-decoration-none">{{ slide_display.event_btn }}</a>
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div><!-- end slider content -->
+
+<section class="w3l-feature-with-photo-1 py-lg-3 py-2">
+  <div class="feature-with-photo-hny">
+    <div class="container">
+      <div class="feature-with-photo-content">
+        <div class="ab-in-flow row py-lg-5 py-md-2">
+          <div class="col-lg-6 ab-right pl-lg-5">
+            {% for business in businesses %}
+            <h6 class="title-google mb-2"><span>{{ business.title }}</span></h6>
+            <h3 class="title-w3l mb-4">{{ business.main_title }}</h3>
+            <p class="my-3">{{ business.description }}</p>
+            {% endfor %}
+           
+            <ul class="motive-list mt-2">
+               {% for motive in motives %}
+              <li class="py-1"><i class="{{ motive.motive_icon }} pe-2"></i>{{ motive.motive }}</li>
+              {% endfor %}
+            </ul>
+            
+
+
+            <div class="w3l-two-buttons">
+              <a href="{% url 'service'%}" class="btn btn-style btn-primary mt-lg-1 mt-3">Read More <span
+                  class="bi bi-chevron-double-right ms-2"></span></a>
+              <a href="{%url 'contact'%}" class="btn btn-outline-primary btn-style mt-lg-1 mt-3 ms-2"> Contact Us<span
+                  class="bi bi-chevron-double-right ms-2"></span></a>
+            </div>
+          </div>
+          <div class="col-lg-6 d-none d-md-block pe-lg-5 mb-lg-5 mt-4">
+            {% if businesses %}
+            <img src="{{ businesses.0.image.url }}" class="img-fluid radius-image shadow-lg bg-body-tertiary rounded" alt="{{ businesses.0.title }}">
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="py-3 latest-products">
+  <div class="container-fluid">
+    <div class="row gx-0">
+      <div class="col-md-1 pb-3 m-auto text-center producttitle">
+        <button type="button" class="btn mb-2 mt-3 mb-md-0 btn-tertiary btn-sm btn-tag mr-4">Latest</button>
+      </div>
+      <div class="col-md-11">
+        <ul class="productlist">
+          {% for product in products %}
+          <li>
+             <div class="w3_agile_portfolio_grid">
+                <a href="{{ product.get_absolute_url|default:'#' }}" class="d-block position-relative">
+                  {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid" />
+                  {% endif %}
+                    <div class="w3layouts_news_grid_pos">
+                        <div class="wthree_text">
+                            <h3>{{ product.title }}</h3>
+                        </div>
+                    </div>
+                </a>
+              </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="home-page-events">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-7">
+        {% for news in news %}
+        <div class="news-content">
+          <div class="section-heading mb-4">
+            
+            <h2 class="entry-title">News Feed</h2>
+          </div><!-- .section-heading -->
+          <a href="#">
+            {% if news.image %}
+            <img class="shadow-lg bg-body-tertiary rounded" src="{{ news.image.url }}" alt="{{ news.news_title }}">
+            {% endif %}
+          </a>
+
+          <header class="entry-header d-flex flex-wrap justify-content-between align-items-center">
+            <div class="header-elements">
+              <div class="posted-date">{{ news.publish_date|date:"F j, Y" }}</div>
+
+              <h2 class="entry-title"><a href="#">{{ news.news_header }}</a></h2>
+
+              <div class="post-metas d-flex flex-wrap align-items-center">
+                <span class="cat-links">in <a href="#">{{ news.address }}</a></span>
+                <span class="post-author">by <a href="#">{{ news.publisher_name }}</a></span>
+
+              </div>
+            </div>
+
+            <div class="donate-icon">
+              <i class="bi bi-1-circle"></i>
+            </div>
+          </header>
+
+          <div class="entry-content">
+            <p>{{ news.news }}</p>
+          </div>
+
+          <footer class="entry-footer">
+            <a href="{% url 'about_us' %}" class="btn gradient-bg">Read More</a>
+          </footer>
+        </div>
+        {% endfor %}
+
+       
+      </div>
+
+
+      <div class="col-12 col-lg-5">
+        <div class="upcoming-events">
+          <div class="search-widget mb-4">
+            <form class="flex flex-wrap align-items-center">
+              <input type="search" placeholder="Search...">
+              <button type="submit" class="flex justify-content-center align-items-center">GO</button>
+            </form><!-- .flex -->
+          </div><!-- .search-widget -->
+          <div class="section-heading">
+            <h2 class="entry-title">Recent Events</h2>
+          </div><!-- .section-heading -->
+          {% for event_part in event_parts %}
+          <div class="event-wrap d-flex flex-wrap justify-content-between">
+            <figure class="m-0">
+              {% if event_part.image %}
+              <img class="shadow-lg bg-body-tertiary rounded" src="{{ event_part.image.url }}" alt="{{ event_part.event_header }}">
+              {% endif %}
+            </figure>
+
+            <div class="event-content-wrap">
+              <header class="entry-header d-flex flex-wrap align-items-center">
+                <h3 class="entry-title w-100 m-0"><a href="#">{{ event_part.event_header }}</a></h3>
+
+                <div class="posted-date">
+                  <a href="#">{{ event_part.publish_date }}</a>
+                </div><!-- .posted-date -->
+
+                <div class="cats-links">
+                  <a href="#">{{ event_part.event_address }}</a>
+                </div><!-- .cats-links -->
+              </header><!-- .entry-header -->
+
+              <div class="entry-content">
+                <p class="m-0">{{ event_part.event_news}}</p>
+              </div><!-- .entry-content -->
+
+              <div class="entry-footer">
+                <a href="#">Read More</a>
+              </div><!-- .entry-footer -->
+            </div><!-- .event-content-wrap -->
+          </div><!-- .event-wrap -->
+            {% endfor %}
+        </div><!-- .upcoming-events -->
+      </div><!-- .col -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+</div>
+<!-- events section -->
+
+
+
+
+<!-- stats section -->
+<section class="w3_stats py-1" id="stats">
+  <div class="container py-lg-5 py-md-4 py-2">
+    <div class="title-main text-center mx-auto mb-5" style="max-width:600px;">
+      <h3 class="title-style text-white">We have biggest Experience</h3>
+    </div>
+    <div class="w3-stats text-center py-lg-4">
+      <div class="row">
+        {% for experience_part in experience_parts %}
+        <div class="col-md-3 col-6">
+          <div class="counter">
+            <i class="{{ experience_part.experience_icon }}"></i>
+            <div class="d-flex align-items-center justify-content-center">
+              <div class="timer" data-to="{{ experience_part.experience_number }}" data-speed="1500"></div>
+              <span class="stats-plus">+</span>
+            </div>
+            <p class="count-text">{{ experience_part.experience_title }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- //stats section -->
+
+<!-- testimonials section -->
+<section class="w3l-clients py-3" id="testimonials">
+  <div class="container py-md-5 py-4">
+    <div class="title-main text-center mx-auto mb-5" style="max-width:600px;">
+      <h6 class="title-subhny mt-2">Feedback From Customers & Clients</h6>
+      <h3 class="title-style">Happy With Customers & Clients</h3>
+    </div>
+    <div id="owl-demo2" class="owl-carousel owl-theme mt-4 py-md-2 mb-md-4">
+      {% for feed_back in feed_backs %}
+      <div class="item">
+        <div class="testimonial-content">
+          <div class="testimonial">
+            <blockquote>
+              <i class="bi bi-quote"></i> {{ feed_back.feedback_header }}
+            </blockquote>
+            <p>{{ feed_back.feedback }}</p>
+          </div>
+          <div class="bottom-info mt-4">
+            {% if feed_back.image %}
+            <a class="comment-img" href="#url"><img src="{{ feed_back.image.url }}" class="img-responsive"
+                alt="placeholder image">
+            </a>
+            {% endif %}
+            <div class="people-info align-self">
+              <h3>{{ feed_back.name }}</h3>
+              <p class="identity">{{ feed_back.designation }}</p>
+            </div>
+          </div>
+            
+        </div>
+      </div>
+      {% endfor %}      
+    </div>
+  </div>
+</section>
+
+ 
+
+
+{% endblock %}

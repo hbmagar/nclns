@@ -1,0 +1,114 @@
+{% extends '../index.html'%}
+{% load static %}
+{% block body %}
+
+<!--main Body part  -->
+<div class="page-header page-banner-about-team object-fit-cover">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="position-absolute top-50 translate-middle-y">
+          <div class="section-heading">
+            <h1 class="entry-title">Teammates</h1>
+          </div>
+          <!-- breadcrum-paging jumping status -->
+          <nav
+            style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+            aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+              <li class="breadcrumb-item" aria-current="page">About Team</li>
+            </ol>
+          </nav>
+        </div>
+      </div><!-- .col -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+</div><!-- .page-header -->
+
+<!-- team section -->
+<section class="w3l-team-main team py-md-2 py-lg-3 py-sm-3" id="team">
+  <div class="container">
+    <div class="w3l-heaser-sec text-center py-sm-4">
+      {% for team_title in team_member_title %}
+      <h6 class="title-subhny my-3"><span>{{ team_title.main_title }}</span></h6>
+      <h3 class="title-w3l mb-4">{{ team_title.sub_title }}
+        <span class="span-bold">{{ team_title.focus_title }}</span>
+      </h3>
+      {% endfor %}
+    </div>
+    <!-- admin teammates -->
+    <div class="m-auto text-center mb-3">
+      <button class="btn btn-style btn-primary">Admin Teammates</button>
+    </div>
+
+    <div class="row team-row">
+      {% for admin_team_member in admin_team_members %}
+      <div class="col-lg-3 col-6 team-wrap">
+        <div class="team-member text-center">
+          <div class="team-img">
+            {% if admin_team_member.image %}
+            <img src="{{ admin_team_member.image.url }}" alt="" class="img-responsive img-fluid img-thumbnail">
+            {% endif %}
+            <div class="overlay-team">
+              <div class="team-details text-center">
+                <div class="socials mt-20">
+                  <a href="{{ admin_team_member.facebook_link }}">
+                    <span class="bi bi-facebook"></span>
+                  </a>
+                  <a href="{{ admin_team_member.twitter_link }}">
+                    <span class="bi bi-twitter"></span>
+                  </a>
+                  <a href="{{ admin_team_member.whatsapp_link }}">
+                    <span class="bi bi-whatsapp"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="#url" class="team-title">{{ admin_team_member.admin_name }}</a>
+          <p>{{ admin_team_member.position }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <hr class="border border-success border-1 opacity-75">
+    <!-- staff teammates -->
+    <div class="mt-5 mb-3 text-center">
+      <button class="btn btn-style gradient-bg">Staff Teammates</button>
+    </div>
+    <div class="row team-row">
+      {% for staff_team_member in staff_team_members %}
+      <div class="col-lg-3 col-6 team-wrap">
+        <div class="team-member text-center">
+          <div class="team-img">
+            {% if staff_team_member.image %}
+            <img src="{{ staff_team_member.image.url }}" alt="" class="img-responsive img-fluid img-thumbnail">
+            {% endif %}
+            <div class="overlay-team">
+              <div class="team-details text-center">
+                <div class="socials mt-20">
+                  <a href="{{ staff_team_member.facebook_link }}">
+                    <span class="bi bi-facebook"></span>
+                  </a>
+                  <a href="{{ staff_team_member.twitter_link }}">
+                    <span class="bi bi-twitter"></span>
+                  </a>
+                  <a href="{{ staff_team_member.whatsapp_link }}">
+                    <span class="bi bi-whatsapp"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="#url" class="team-title">{{ staff_team_member.staff_name }}</a>
+          <p>{{ staff_team_member.position }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
